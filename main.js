@@ -54,6 +54,42 @@ const controls = new OrbitControls(camera,renderer.domElement)
 
 scene.add(pointlight,ambidentLight,lightHelper,gridHelper)
 
+function addStars() {
+  const sphere = new THREE.SphereGeometry(0.5,24,24)
+  const material = new THREE.MeshStandardMaterial({color:0xffffff})
+  const star = new THREE.Mesh(sphere,material)
+
+  const [x,y,z] = Array(3).fill().map(()=>THREE.MathUtils.randFloatSpread(100))
+
+  star.position.set(x,y,z)
+
+  scene.add(star)
+}
+
+Array(200).fill().forEach(addStars)
+
+//5.Background
+const spaceBg = new THREE.TextureLoader().load('img/space.jpg')
+scene.background = spaceBg
+
+
+//Texture
+const boxtextute = new THREE.TextureLoader().load('img/spiderman.jpg')
+const box = new THREE.Mesh(
+  new THREE.BoxGeometry(3,3,3),
+  new THREE.MeshBasicMaterial({map:boxtextute})
+)
+
+scene.add(box)
+
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.002;
+  camera.position.y = t * -0.002;
+}
+document.body.onscroll = moveCamera
 
 function animate() {
   requestAnimationFrame(animate)
