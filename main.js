@@ -74,10 +74,10 @@ scene.background = spaceBg
 
 
 //Texture
-const boxtextute = new THREE.TextureLoader().load('img/spiderman.jpg')
+// const boxtextute = new THREE.TextureLoader().load()
 const box = new THREE.Mesh(
   new THREE.BoxGeometry(3,3,3),
-  new THREE.MeshBasicMaterial({map:boxtextute})
+  new THREE.MeshBasicMaterial({color:0xffffff})
 )
 
 scene.add(box)
